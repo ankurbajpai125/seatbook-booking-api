@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: seatbook
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/seatbook?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${DB_USER:seatbook}
+    password: ${DB_PASSWORD:seatbook}
+  jpa:
+    hibernate:
+      ddl-auto: update   # fine for a demo; use Flyway migrations for real deployments
+    open-in-view: false
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-me-please-change-me-please-change-me-123456}
+    expiry-minutes: 120
+  hold:
+    minutes: 5            # how long selected seats stay locked while paying
+    max-seats-per-booking: 6
+  expiry-sweep-ms: 30000  # how often expired holds are released
+  admin:
+    email: ${ADMIN_EMAIL:admin@seatbook.local}
+    password: ${ADMIN_PASSWORD:admin12345}
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://localhost:3000}

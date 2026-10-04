@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:seatbook;MODE=MySQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    hikari:
+      maximum-pool-size: 30
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+app:
+  jwt:
+    secret: test-secret-test-secret-test-secret-test-secret-1234
+  expiry-sweep-ms: 3600000

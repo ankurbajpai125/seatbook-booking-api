@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: seatbook
+      MYSQL_USER: seatbook
+      MYSQL_PASSWORD: seatbook
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  app:
+    build: .
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/seatbook?useSSL=false&allowPublicKeyRetrieval=true
+      DB_USER: seatbook
+      DB_PASSWORD: seatbook
+      REDIS_HOST: redis
+      JWT_SECRET: change-me-please-change-me-please-change-me-123456
+    ports:
+      - "8080:8080"
