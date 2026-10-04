@@ -87,12 +87,3 @@ curl -s -X POST $BASE/bookings/1/cancel -H "Authorization: Bearer $TOKEN"
 | GET | `/api/bookings/mine`, `/api/bookings/{id}` | USER |
 
 Errors are JSON: `{ "status": 409, "error": "...", "timestamp": "..." }`. Seat conflicts are `409`, expired holds `410`, unknown or foreign bookings `404`.
-
-## Not done yet
-
-- React seat-map frontend
-- Redis caching for the movie and show listings
-- Load test (k6/JMeter) with numbers for the resume
-- GitHub Actions CI and a live deployment
-- Flyway migrations instead of `ddl-auto: update`
-- Real payment gateway and refunds (payment is mocked)
