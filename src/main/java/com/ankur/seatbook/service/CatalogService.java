@@ -41,6 +41,10 @@ public class CatalogService {
         return movieRepo.findById(id).orElseThrow(() -> ApiException.notFound("Movie"));
     }
 
+    public ShowView show(Long id) {
+        return showRepo.findById(id).map(CatalogService::toView).orElseThrow(() -> ApiException.notFound("Show"));
+    }
+
     public List<ShowView> upcomingShows(Long movieId) {
         movie(movieId);
         return showRepo.findByMovieIdAndStartTimeAfterOrderByStartTime(movieId, LocalDateTime.now())

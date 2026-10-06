@@ -41,6 +41,11 @@ public class CatalogController {
         return catalog.upcomingShows(id);
     }
 
+    @GetMapping("/shows/{id}")
+    public ShowView show(@PathVariable Long id) {
+        return catalog.show(id);
+    }
+
     @GetMapping("/shows/{id}/seats")
     public List<SeatView> seats(@PathVariable Long id) {
         return catalog.seatMap(id);

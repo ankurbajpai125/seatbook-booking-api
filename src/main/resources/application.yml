@@ -6,8 +6,8 @@ spring:
     name: seatbook
   datasource:
     url: ${DB_URL:jdbc:mysql://localhost:3306/seatbook?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true}
-    username: ${DB_USER:seatbook}
-    password: ${DB_PASSWORD:seatbook}
+    username: root
+    password: Bajpai12345@
   jpa:
     hibernate:
       ddl-auto: update   # fine for a demo; use Flyway migrations for real deployments
@@ -25,6 +25,7 @@ app:
     minutes: 5            # how long selected seats stay locked while paying
     max-seats-per-booking: 6
   expiry-sweep-ms: 30000  # how often expired holds are released
+  seed-demo-data: ${SEED_DEMO_DATA:true}   # sample movies/shows on an empty database; set false in production
   admin:
     email: ${ADMIN_EMAIL:admin@seatbook.local}
     password: ${ADMIN_PASSWORD:admin12345}
